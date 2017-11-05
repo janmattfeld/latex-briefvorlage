@@ -1,0 +1,24 @@
+sudo: required
+language: ruby
+services:
+  - docker
+env:
+  - ROOT_FILE=Brief
+script:
+  - 'docker run --volume "$PWD":/workdir --workdir /workdir tianon/latex latexmk -pdf "$ROOT_FILE".tex'
+before_deploy:
+  - 'wget -O pdfsizeopt.single https://raw.githubusercontent.com/pts/pdfsizeopt/master/pdfsizeopt.single'
+  - 'chmod +x pdfsizeopt.single'
+  - 'docker run --volume "$PWD":/workdir --workdir /workdir ptspts/pdfsizeopt ./pdfsizeopt.single "$ROOT_FILE".pdf "$ROOT_FILE".pdf'
+  - 'docker run --volume "$PWD":/workdir --workdir /workdir tianon/latex convert -background white -alpha remove "$ROOT_FILE".pdf "$ROOT_FILE".png'
+deploy:
+  provider: releases
+  api_key:
+    secure: bHBj5NY7+pVZKdde1SEpJ+QLrJLh1HfkOM6+h0C/Lxyel9rTA/drCPuI9R/dHkuK+FrkS9jC7/6RL1iCuTVzRKbm41cDv/qdf9jIL0HUnPfRT0PJkp0uDPafNXqEnaH56P7H7/0lLZmiS/JJNuVwFdOwGut1Md1a/LJ30RzuhLEamv9kpgJ20RPtG0kwRbuHUw0s2W73kCW+Cmp/uHx3Z+k4Gx2IQZQLeuPpKQgkaSqCxB2F10MjpBwR7yn07l53CsWc7TAC8XXjvNctHdFqnQWrNmQRDzbOpDwO9FgINrsJyFfNEL/uK6AZW6gFeTQezvMqD+VNI1wAyVVgn32XFK4Xz+caQqcTdkb8QqkjWtRgKwYgGRKT65iZxgeKSnKzTBRlP7geNHplTZSArQrLUOhxCrF2OaJMB1M4kRmWlF7/vSkXKEONVF8neGm8vMH1Nyb0JiT24AV1v7C8zHWezrm70HkPQ8aPwvF1horB8aaNwkSl5wsLbKbVlFQfe7gJ0X97P5+MIl14o50uWLYsbe0asLKji6KA7+A1li8kfOpu46yZnVYueGUEC6mSW40S/fUq+gxPMS+9it2cnvb9XkvAF/8uBRSBLdUIggJyP2UaBBgU7ZWbf0cjni003UbaUm6ia2Q3R47BmZdMlcihJ/trfWpGMYYXdGW+fFxcsXs=
+  file:
+    - $ROOT_FILE.pdf
+    - $ROOT_FILE.png
+  skip_cleanup: true
+  on:
+    repo: janmattfeld/latex-briefvorlage
+    tags: true

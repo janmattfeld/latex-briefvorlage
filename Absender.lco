@@ -1,0 +1,9 @@
+\ProvidesFile{sender.lco}[2017/11/01 Custom Sender Information (Jan Mattfeld)]
+%
+\newcommand{\mFirstname}{Max}
+\newcommand{\mLastname}{Mustermann}
+\newcommand{\mStreet}{Beispielweg~23\,a}
+\newcommand{\mPostalcode}{12345}
+\newcommand{\mCity}{Köln}
+\newcommand{\mPhone}{+49~123~5279143}
+\newcommand{\mEmail}{max@mustermann.de}
