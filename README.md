@@ -17,4 +17,4 @@ A clean and modern formal letter. Roughly aligns German DIN 5008 with typographi
 
 ## Example
 
-[![letter_example](https://github.com/janmattfeld/latex-briefvorlage/releases/download/0.0.1/Brief.png)](https://github.com/janmattfeld/latex-briefvorlage/releases/download/0.0.1/Brief.pdf)
+[![brief](https://user-images.githubusercontent.com/4159417/32417636-ab4d80d8-c25c-11e7-8564-c7df9eb4601a.png)](https://github.com/janmattfeld/latex-briefvorlage/releases/download/0.0.1/Brief.pdf)
